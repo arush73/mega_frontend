@@ -3,7 +3,6 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import axios from "axios"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import { useAuthStore } from "@/app/store/useAuthStore"
@@ -21,17 +20,10 @@ import { Field, FieldLabel, FieldGroup } from "@/components/ui/field"
 export default function ResetPasswordPage() {
   const params = useParams()
   const router = useRouter()
-  const [token, setToken] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const { resetPassword, isResettingPassword } = useAuthStore()
-
-  useEffect(() => {
-    if (params?.token) {
-      setToken(params.token)
-    }
-  }, [params])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -51,7 +43,7 @@ export default function ResetPasswordPage() {
       return
     }
     setLoading(true)
-    resetPassword(token, newPassword)
+    resetPassword(params.token, newPassword)
     // Redirect to login page after successful reset
     //   setTimeout(() => {
     // router.push("/login")
