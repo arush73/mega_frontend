@@ -1,15 +1,14 @@
-"use client";
-import React, { useEffect } from "react";
-import { useParams } from "next/navigation";
-import { axiosInstance } from "@/lib/axios";
-import { useRouter } from "next/navigation";
-
+"use client"
+import React, { useEffect } from "react"
+import { useParams } from "next/navigation"
+import { axiosInstance } from "@/lib/axios"
+import { useRouter } from "next/navigation"
 
 const Page = () => {
-  const params = useParams();
-const router = useRouter()
-  const accessToken = params.tokens[0];
-  const refreshToken = params.tokens[1];
+  const params = useParams()
+  const router = useRouter()
+  const accessToken = params.tokens[0]
+  const refreshToken = params.tokens[1]
 
   useEffect(() => {
     if (
@@ -21,13 +20,13 @@ const router = useRouter()
       axiosInstance.post("/auth/cookie-setter", {
         accessToken,
         refreshToken,
-      });
+      })
     }
 
-    router.replace("/");
-  }, [accessToken, refreshToken]);
+    router.replace("/")
+  }, [accessToken, refreshToken])
 
-  return <div>redirecting...</div>;
-};
+  return <div>redirecting...</div>
+}
 
-export default Page;
+export default Page

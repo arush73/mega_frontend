@@ -24,8 +24,8 @@ export default function ResetPasswordPage() {
   const [token, setToken] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-    const [loading, setLoading] = useState(false)
-    const {resetPassword, isResettingPassword} = useAuthStore()
+  const [loading, setLoading] = useState(false)
+  const { resetPassword, isResettingPassword } = useAuthStore()
 
   useEffect(() => {
     if (params?.token) {
@@ -51,12 +51,11 @@ export default function ResetPasswordPage() {
       return
     }
     setLoading(true)
-    resetPassword(token, newPassword)      
-      // Redirect to login page after successful reset
+    resetPassword(token, newPassword)
+    // Redirect to login page after successful reset
     //   setTimeout(() => {
-        // router.push("/login")
+    // router.push("/login")
     //   }, 2000)
-
   }
 
   return (
@@ -83,7 +82,9 @@ export default function ResetPasswordPage() {
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="confirmPassword">Confirm Password</FieldLabel>
+                <FieldLabel htmlFor="confirmPassword">
+                  Confirm Password
+                </FieldLabel>
                 <Input
                   id="confirmPassword"
                   type="password"
@@ -94,7 +95,11 @@ export default function ResetPasswordPage() {
                 />
               </Field>
             </FieldGroup>
-            <Button type="submit" className="w-full" disabled={isResettingPassword}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isResettingPassword}
+            >
               {isResettingPassword ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -105,12 +110,15 @@ export default function ResetPasswordPage() {
               )}
             </Button>
           </form>
-           <div className="text-center text-sm mt-4">
-                <Link href="/login" className="flex items-center justify-center gap-2 text-muted-foreground hover:text-primary">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Login
-                </Link>
-              </div>
+          <div className="text-center text-sm mt-4">
+            <Link
+              href="/login"
+              className="flex items-center justify-center gap-2 text-muted-foreground hover:text-primary"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Login
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

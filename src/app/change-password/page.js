@@ -20,8 +20,8 @@ export default function ResetPasswordPage() {
   const [token, setToken] = useState("")
   const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
-    const [loading, setLoading] = useState(false)
-    const {changePassword, isChangingPassword} = useAuthStore()
+  const [loading, setLoading] = useState(false)
+  const { changePassword, isChangingPassword } = useAuthStore()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -41,12 +41,11 @@ export default function ResetPasswordPage() {
       return
     }
     setLoading(true)
-    changePassword(oldPassword, newPassword)      
-      // Redirect to login page after successful reset
+    changePassword(oldPassword, newPassword)
+    // Redirect to login page after successful reset
     //   setTimeout(() => {
-        // router.push("/login")
+    // router.push("/login")
     //   }, 2000)
-
   }
 
   return (
@@ -70,11 +69,11 @@ export default function ResetPasswordPage() {
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   disabled={isChangingPassword}
-                              />
+                />
               </Field>
               <Field>
                 <FieldLabel htmlFor="confirmPassword">New Password</FieldLabel>
-                               <Input
+                <Input
                   id="newPassword"
                   type="password"
                   placeholder="Enter new password"
@@ -84,7 +83,11 @@ export default function ResetPasswordPage() {
                 />
               </Field>
             </FieldGroup>
-            <Button type="submit" className="w-full" disabled={isChangingPassword}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={isChangingPassword}
+            >
               {isChangingPassword ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -95,12 +98,15 @@ export default function ResetPasswordPage() {
               )}
             </Button>
           </form>
-           <div className="text-center text-sm mt-4">
-                <Link href="/login" className="flex items-center justify-center gap-2 text-muted-foreground hover:text-primary">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Login
-                </Link>
-              </div>
+          <div className="text-center text-sm mt-4">
+            <Link
+              href="/login"
+              className="flex items-center justify-center gap-2 text-muted-foreground hover:text-primary"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back to Login
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>
