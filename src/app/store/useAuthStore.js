@@ -10,6 +10,7 @@ export const useAuthStore = create((set) => ({
   isuserChecked: false,
   isSSO: false,
   isRegistrationSuccessfull:false,
+  isResettingPassword: false,
 
   checkUser: async () => {
     set({ isCheckingAuth: true });
@@ -98,6 +99,20 @@ export const useAuthStore = create((set) => ({
       toast(`${name} not working 🥲`);
     } finally {
       set({ isSSO: false });
+    }
+  },
+
+  forgotPassword: async (email) => {
+    set({ isResettingPassword: true });
+    try {
+      const response = await axiosInstance.post("/auth/forgot-password", { email });
+      console.log("Forgot password response: ", response.data);
+      toast.success("Password reset link sent to your email");
+    } catch (error) {
+      console.log("Error sending forgot password email: ", error.message);
+      toast.error("Failed to send reset link");
+    } finally {
+      set({ isResettingPassword: false });
     }
   },
 }));
