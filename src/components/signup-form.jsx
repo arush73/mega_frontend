@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -94,16 +95,16 @@ export function SignupForm({
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <a href="/forgot-password" className="ml-auto text-sm underline-offset-4 hover:underline">
+                  <Link href="/forgot-password" className="ml-auto text-sm underline-offset-4 hover:underline">
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
                 <Input id="password" type="password" required onChange={(e) => setPassword(e.target.value)}/>
               </Field>
               <Field>
                 <Button type="submit" onClick={handleRegister} disabled={isRegistering}>Sign Up</Button>
                 <FieldDescription className="text-center">
-                  Already have an account? <a href="/login">login</a>
+                  Already have an account? <Link href="/login">login</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
@@ -111,8 +112,8 @@ export function SignupForm({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        By clicking continue, you agree to our <Link href="#">Terms of Service</Link>{" "}
+        and <Link href="#">Privacy Policy</Link>.
       </FieldDescription>
     </div>
   );

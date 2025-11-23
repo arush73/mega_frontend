@@ -11,6 +11,7 @@ export const useAuthStore = create((set) => ({
   isSSO: false,
   isRegistrationSuccessfull:false,
   isResettingPassword: false,
+  isChangingPassword: false,
 
   checkUser: async () => {
     set({ isCheckingAuth: true });
@@ -113,6 +114,33 @@ export const useAuthStore = create((set) => ({
       toast.error("Failed to send reset link");
     } finally {
       set({ isResettingPassword: false });
+    }
+  },
+
+  resetPassword: async (token, newPassword) => {
+    set({ isResettingPassword: true });
+    try {
+      const response = await axiosInstance.post(`/auth/reset-password/${token}`, { newPassword });
+      console.log("Reset password response: ", response.data);
+      toast.success("Password reset successfully");
+    } catch (error) {
+      console.log("Error resetting password: ", error.message);
+      toast.error("Failed to reset password");
+    } finally {
+      set({ isResettingPassword: false });
+    }
+  },
+
+  changePassword: async (oldPassword, newPassword) => {
+    set({ isChangingPassword: true });
+    try {
+      const response = await axiosInstance.post(`/auth/change-password`, { oldPassword, newPassword });
+      toast.success("Password changed successfully");
+    } catch (error) {
+      console.log("Error changing password: ", error.message);
+      toast.error("Failed to change password");
+    } finally {
+      set({ isChangingPassword: false });
     }
   },
 }));
