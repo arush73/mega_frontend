@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TeamBuilder Frontend 🎨
 
-## Getting Started
+The client-side application for **TeamBuilder**, built with modern web technologies to provide a seamless and responsive user experience for cohort-based course collaboration.
 
-First, run the development server:
+## 🛠️ Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: JavaScript (ES6+)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Components**: [Shadcn UI](https://ui.shadcn.com/) (Radix UI primitives)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **HTTP Client**: [Axios](https://axios-http.com/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/)
+- **Theming**: [next-themes](https://github.com/pacocoursey/next-themes)
+
+## ✨ Key Features
+
+- **Authentication System**:
+  - Login & Registration forms with validation.
+  - OAuth integration (Google & GitHub) support.
+  - Password Reset & Forgot Password flows.
+- **Dark Mode**: Fully supported system-aware theme toggle.
+- **Responsive Design**: Mobile-first approach ensuring compatibility across devices.
+- **Protected Routes**: Middleware/State-based protection for authenticated areas.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have the following installed:
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1.  **Navigate to the frontend directory:**
+    ```bash
+    cd frontend
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Configure Environment Variables:**
+    Create a `.env.local` file in the root of the `frontend` directory:
+    ```env
+    NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1
+    ```
+
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 📂 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── app/                 # Next.js App Router pages and layouts
+│   │   ├── (auth)/          # Authentication related pages
+│   │   ├── demo/            # Demo pages
+│   │   ├── globals.css      # Global styles and Tailwind directives
+│   │   ├── layout.js        # Root layout with ThemeProvider
+│   │   └── page.js          # Landing page
+│   ├── components/          # Reusable React components
+│   │   ├── ui/              # Shadcn UI components (buttons, inputs, cards)
+│   │   ├── mode-toggle.jsx  # Theme switcher
+│   │   └── ...
+│   ├── lib/                 # Utility functions and configurations
+│   │   ├── axios.js         # Axios instance setup
+│   │   └── utils.js         # CN utility for Tailwind
+│   └── store/               # Zustand state stores (useAuthStore.js)
+├── public/                  # Static assets
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📜 Available Scripts
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `npm run dev`: Runs the app in development mode.
+- `npm run build`: Builds the app for production.
+- `npm start`: Starts the production server.
+- `npm run lint`: Runs ESLint to check for code quality issues.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 UI Design System
 
-## Learn More
+We use a customized version of **Shadcn UI**.
+- **Colors**: Defined in `globals.css` using CSS variables for easy theming.
+- **Typography**: Uses `Geist Sans` and `Geist Mono` fonts.
+- **Animations**: Powered by `tailwindcss-animate`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ for the TeamBuilder Community.
