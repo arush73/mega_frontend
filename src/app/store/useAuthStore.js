@@ -6,7 +6,7 @@ export const useAuthStore = create((set) => ({
   user: null,
   isRegistering: false,
   isLoggingIn: false,
-  isCheckingAuth: false,
+  isCheckingUser: false,
   isuserChecked: false,
   isSSO: false,
   isRegistrationSuccessfull: false,
@@ -14,7 +14,7 @@ export const useAuthStore = create((set) => ({
   isChangingPassword: false,
 
   checkUser: async () => {
-    set({ isCheckingAuth: true })
+    set({ isCheckingUser: true })
     try {
       const response = await axiosInstance.get("/auth/current-user")
       console.log("Checking auth: ", response.data)
@@ -27,7 +27,7 @@ export const useAuthStore = create((set) => ({
       set({ user: null })
     } finally {
       set({
-        isCheckingAuth: false,
+        isCheckingUser: false,
       })
     }
   },

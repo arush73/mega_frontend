@@ -35,7 +35,7 @@ import Link from "next/link"
 export function NavUser({
 }) {
   const { isMobile } = useSidebar()
-  // const { user } = useAuthStore()
+  const { logOut } = useAuthStore()
 
   const user = {
     name: "Arush Choudhary",
@@ -106,7 +106,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logOut}>
               <LogOut />
               Log out
             </DropdownMenuItem>

@@ -1,3 +1,4 @@
+"use client"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
@@ -13,9 +14,40 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { useEffect, useState } from "react"
+import { Loader } from "@/components/ui/loader"
+import { useRouter } from "next/navigation"
+import { useAppStore } from "@/app/store/useAppStore"
+import { useAuthStore } from "@/app/store/useAuthStore"
 
 export default function Page() {
+  const { user, checkUser, isCheckingUser } = useAuthStore()
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { isInitialDataBeingFetched } = useAppStore()
+
+  // uncomment after dev is complete
+  // useEffect(() => {
+  //   checkUser()
+  // }, [])
+
+  // useEffect(() => {
+  //   if(user){
+  //     setLoading(false)
+  //   }
+
+  //   if(!user){
+  //     router.push('/home')
+  //   }
+  // }, [user])
+
+  // useEffect(() => {
+  //   setLoading(isInitialDataBeingFetched || isCheckingUser)
+  // }, [isInitialDataBeingFetched, isCheckingUser])
+
   return (
+
+    loading ? <Loader /> : 
     <SidebarProvider
       style={
         {
@@ -24,7 +56,7 @@ export default function Page() {
       }
     >
       <AppSidebar />
-      <SidebarInset>
+      {/* <SidebarInset>
         <header className="bg-background sticky top-0 flex shrink-0 items-center gap-2 border-b p-4">
           <SidebarTrigger className="-ml-1" />
           <Separator
@@ -51,7 +83,7 @@ export default function Page() {
             />
           ))}
         </div>
-      </SidebarInset>
+      </SidebarInset> */}
     </SidebarProvider>
   )
 }

@@ -19,6 +19,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { Switch } from "@/components/ui/switch"
+import { useProfileStore } from "@/app/store/useProfileStore"
+import { useAuthStore } from "@/app/store/useAuthStore"
 import { useAppStore } from "@/app/store/useAppStore"
 
 // This is sample data
@@ -150,7 +152,16 @@ export function AppSidebar({
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
 
-  const { fetchedUserData } = useAppStore()
+  const { fetchInitialUserData, initialUserData } = useAppStore()
+
+  React.useEffect(() => {
+    fetchInitialUserData()
+  }, [])
+
+  React.useEffect(() => {
+    console.log("initialUserData: ", initialUserData)
+  }, [initialUserData])
+
 
   const data = {
     navMain: [{

@@ -1,21 +1,22 @@
 import { create } from "zustand";
-import { axiosInstance } from "@/lib/axios";
+import {axiosInstance} from "@/lib/axios";
 
 const useAppStore = create((set) => ({
-    fetchedUserData: null,
-    isFetchingData: false,
+    isInitialDataBeingFetched: false,
+    initialUserData: null,
 
-    fetchUserData: async (profileId) => {
-        set({isFetchingData: true})
+    fetchInitialUserData: async (userId) => {
+        set({isInitialDataBeingFetched: true})
         try {
-            const response = await axiosInstance.get('/profile/:profileId')
-            set({fetchedUserData: response.data})
+            const response = await axiosInstance.get(`/profile/me/${userId}`)
+            set({initialUserData: response.data.data})
         } catch (error) {
             console.log("Error fetching user data ", error.message)
         } finally {
-            set({isFetchingData: false})
+            set({isInitialDataBeingFetched: false})
         }
-    }
+    
+  }  
 }))
 
 export {
