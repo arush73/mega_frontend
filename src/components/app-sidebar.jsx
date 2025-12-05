@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { Hash, Users, ChevronDown, ChevronRight } from "lucide-react"
-
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
