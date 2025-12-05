@@ -8,6 +8,7 @@ import { useTeamStore } from "@/app/store/useTeamStore"
 import { ServerList } from "@/components/server-list"
 import { DiscordSidebar } from "@/components/discord-sidebar"
 import { ChatPanel } from "@/components/chat-panel"
+import { useSocket } from "@/hooks/useSocket"
 
 export default function Page() {
   const { user, checkUser, isCheckingUser } = useAuthStore()
@@ -17,6 +18,8 @@ export default function Page() {
 
   const [activeTab, setActiveTab] = useState("teams") // 'cohorts' or 'teams'
   const [selectedItem, setSelectedItem] = useState(null)
+
+    useSocket()
 
   // Check user authentication
   useEffect(() => {
