@@ -19,7 +19,7 @@ export default function Page() {
   const [activeTab, setActiveTab] = useState("teams") // 'cohorts' or 'teams'
   const [selectedItem, setSelectedItem] = useState(null)
 
-    useSocket()
+  useSocket()
 
   // Check user authentication
   useEffect(() => {
@@ -57,7 +57,6 @@ export default function Page() {
   if (isCheckingUser) {
     return <Loader />
   }
-
 
   // Don't render anything if no user (will redirect)
   if (!user) {

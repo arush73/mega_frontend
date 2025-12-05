@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "TeamBuilder - The OS for Cohort-Based Courses",
-  description: "A dedicated platform for course creators to help students collaborate, form teams, and ship projects.",
+  description:
+    "A dedicated platform for course creators to help students collaborate, form teams, and ship projects.",
 }
 
 export default function RootLayout({ children }) {

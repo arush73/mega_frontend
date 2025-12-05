@@ -14,7 +14,7 @@ export const getOrCreateCohortChat = async (cohort) => {
   try {
     // For cohorts, we create a group chat with all members
     // The cohort admin should be the chat admin
-    
+
     // First, try to get existing chats and find one for this cohort
     const allChats = await chatService.getAllChats()
     const existingChat = allChats.data?.find(
@@ -52,7 +52,7 @@ export const getOrCreateCohortChat = async (cohort) => {
 export const getOrCreateTeamChat = async (team) => {
   try {
     // For teams, we create a group chat with all members
-    
+
     // First, try to get existing chats and find one for this team
     const allChats = await chatService.getAllChats()
     const existingChat = allChats.data?.find(
@@ -116,9 +116,7 @@ export const initializeChatForItem = async (item, type) => {
 export const findChatForItem = (item, chats) => {
   if (!item || !chats) return null
 
-  return chats.find(
-    (chat) => chat.name === item.name && chat.isGroupChat
-  )
+  return chats.find((chat) => chat.name === item.name && chat.isGroupChat)
 }
 
 /**

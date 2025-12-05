@@ -62,8 +62,12 @@ export const useChatStore = create((set, get) => ({
   sendMessage: async (chatId, content, attachments = []) => {
     set({ isSendingMessage: true })
     try {
-      const response = await messageService.sendMessage(chatId, content, attachments)
-      
+      const response = await messageService.sendMessage(
+        chatId,
+        content,
+        attachments
+      )
+
       // Add the new message to the messages array
       set((state) => ({
         messages: [...state.messages, response.data],
@@ -73,9 +77,7 @@ export const useChatStore = create((set, get) => ({
       // Update the chat's last message in the chats list
       set((state) => ({
         chats: state.chats.map((chat) =>
-          chat._id === chatId
-            ? { ...chat, lastMessage: response.data }
-            : chat
+          chat._id === chatId ? { ...chat, lastMessage: response.data } : chat
         ),
       }))
 
@@ -90,7 +92,7 @@ export const useChatStore = create((set, get) => ({
   deleteMessage: async (chatId, messageId) => {
     try {
       await messageService.deleteMessage(chatId, messageId)
-      
+
       // Remove the message from the messages array
       set((state) => ({
         messages: state.messages.filter((msg) => msg._id !== messageId),
@@ -104,7 +106,7 @@ export const useChatStore = create((set, get) => ({
   // Socket event handlers
   handleNewMessage: (message) => {
     const { currentChat, messages } = get()
-    
+
     // Only add message if it belongs to the current chat
     if (currentChat?._id === message.chat) {
       set({ messages: [...messages, message] })
@@ -113,9 +115,7 @@ export const useChatStore = create((set, get) => ({
     // Update the chat's last message in the chats list
     set((state) => ({
       chats: state.chats.map((chat) =>
-        chat._id === message.chat
-          ? { ...chat, lastMessage: message }
-          : chat
+        chat._id === message.chat ? { ...chat, lastMessage: message } : chat
       ),
     }))
   },
@@ -135,7 +135,8 @@ export const useChatStore = create((set, get) => ({
   handleLeaveChat: (chat) => {
     set((state) => ({
       chats: state.chats.filter((c) => c._id !== chat._id),
-      currentChat: state.currentChat?._id === chat._id ? null : state.currentChat,
+      currentChat:
+        state.currentChat?._id === chat._id ? null : state.currentChat,
       messages: state.currentChat?._id === chat._id ? [] : state.messages,
     }))
   },
@@ -143,7 +144,8 @@ export const useChatStore = create((set, get) => ({
   handleUpdateGroupName: (chat) => {
     set((state) => ({
       chats: state.chats.map((c) => (c._id === chat._id ? chat : c)),
-      currentChat: state.currentChat?._id === chat._id ? chat : state.currentChat,
+      currentChat:
+        state.currentChat?._id === chat._id ? chat : state.currentChat,
     }))
   },
 

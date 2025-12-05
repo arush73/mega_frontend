@@ -20,7 +20,8 @@ export default function UpgradePage() {
           Upgrade to Pro
         </h1>
         <p className="text-xl text-muted-foreground max-w-[600px] mx-auto">
-          Unlock the full potential of TeamBuilder with advanced features for power users and large cohorts.
+          Unlock the full potential of TeamBuilder with advanced features for
+          power users and large cohorts.
         </p>
       </div>
 
@@ -78,21 +79,23 @@ export default function UpgradePage() {
   )
 }
 
-function PricingCard({ 
-  title, 
-  price, 
-  period, 
-  description, 
-  features, 
-  buttonText, 
+function PricingCard({
+  title,
+  price,
+  period,
+  description,
+  features,
+  buttonText,
   buttonVariant = "default",
-  popular = false
+  popular = false,
 }) {
   return (
-    <Card className={cn(
-      "flex flex-col relative", 
-      popular && "border-primary shadow-lg scale-105 z-10"
-    )}>
+    <Card
+      className={cn(
+        "flex flex-col relative",
+        popular && "border-primary shadow-lg scale-105 z-10"
+      )}
+    >
       {popular && (
         <div className="absolute -top-4 left-0 right-0 flex justify-center">
           <span className="bg-primary text-primary-foreground text-sm font-medium px-3 py-1 rounded-full">

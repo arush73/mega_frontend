@@ -36,27 +36,36 @@ export const chatService = {
 
   // Rename group chat
   renameGroupChat: async (chatId, name) => {
-    const response = await axiosInstance.patch(`/chat-app/chats/group/${chatId}`, {
-      name,
-    })
+    const response = await axiosInstance.patch(
+      `/chat-app/chats/group/${chatId}`,
+      {
+        name,
+      }
+    )
     return response.data
   },
 
   // Delete group chat
   deleteGroupChat: async (chatId) => {
-    const response = await axiosInstance.delete(`/chat-app/chats/group/${chatId}`)
+    const response = await axiosInstance.delete(
+      `/chat-app/chats/group/${chatId}`
+    )
     return response.data
   },
 
   // Delete one-on-one chat
   deleteOneOnOneChat: async (chatId) => {
-    const response = await axiosInstance.delete(`/chat-app/chats/remove/${chatId}`)
+    const response = await axiosInstance.delete(
+      `/chat-app/chats/remove/${chatId}`
+    )
     return response.data
   },
 
   // Leave group chat
   leaveGroupChat: async (chatId) => {
-    const response = await axiosInstance.delete(`/chat-app/chats/leave/group/${chatId}`)
+    const response = await axiosInstance.delete(
+      `/chat-app/chats/leave/group/${chatId}`
+    )
     return response.data
   },
 

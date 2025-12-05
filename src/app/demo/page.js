@@ -2,21 +2,21 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { 
-  LayoutDashboard, 
-  Users, 
-  MessageSquare, 
-  FolderGit2, 
-  Settings, 
-  Bell, 
-  Search, 
+import {
+  LayoutDashboard,
+  Users,
+  MessageSquare,
+  FolderGit2,
+  Settings,
+  Bell,
+  Search,
   Menu,
   LogOut,
   Plus,
   MoreVertical,
   Github,
   Linkedin,
-  Mail
+  Mail,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
@@ -32,14 +32,44 @@ import { cn } from "@/lib/utils"
 
 // Mock Data
 const RECOMMENDED_TEAMMATES = [
-  { id: 1, name: "Sarah Chen", role: "Frontend Dev", skills: ["React", "Tailwind", "Figma","tight pussy"], match: "98%" },
-  { id: 2, name: "Alex Kumar", role: "Backend Dev", skills: ["Node.js", "PostgreSQL", "Redis"], match: "95%" },
-  { id: 3, name: "Jordan Smith", role: "UI/UX Designer", skills: ["Figma", "Prototyping", "User Research"], match: "92%" },
+  {
+    id: 1,
+    name: "Sarah Chen",
+    role: "Frontend Dev",
+    skills: ["React", "Tailwind", "Figma", "tight pussy"],
+    match: "98%",
+  },
+  {
+    id: 2,
+    name: "Alex Kumar",
+    role: "Backend Dev",
+    skills: ["Node.js", "PostgreSQL", "Redis"],
+    match: "95%",
+  },
+  {
+    id: 3,
+    name: "Jordan Smith",
+    role: "UI/UX Designer",
+    skills: ["Figma", "Prototyping", "User Research"],
+    match: "92%",
+  },
 ]
 
 const ACTIVE_PROJECTS = [
-  { id: 1, name: "E-Learning Platform", status: "In Progress", progress: 65, dueDate: "2 days left" },
-  { id: 2, name: "Finance Dashboard", status: "Review", progress: 90, dueDate: "5 days left" },
+  {
+    id: 1,
+    name: "E-Learning Platform",
+    status: "In Progress",
+    progress: 65,
+    dueDate: "2 days left",
+  },
+  {
+    id: 2,
+    name: "Finance Dashboard",
+    status: "Review",
+    progress: 90,
+    dueDate: "5 days left",
+  },
 ]
 
 export default function DemoPage() {
@@ -48,7 +78,7 @@ export default function DemoPage() {
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar */}
-      <aside 
+      <aside
         className={cn(
           "fixed inset-y-0 left-0 z-30 w-64 transform border-r bg-card transition-transform duration-200 ease-in-out md:relative md:translate-x-0",
           !isSidebarOpen && "-translate-x-full md:hidden"
@@ -57,12 +87,12 @@ export default function DemoPage() {
         <div className="flex h-16 items-center border-b px-6">
           <div className="flex items-center gap-2 font-bold text-xl">
             <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
-              <FolderGit2  className="size-5" />
+              <FolderGit2 className="size-5" />
             </div>
             <span>TeamBuilder</span>
           </div>
         </div>
-        
+
         <nav className="space-y-1 p-4">
           <NavItem icon={<LayoutDashboard />} label="Dashboard" active />
           <NavItem icon={<Users />} label="Find Teammates" />
@@ -80,7 +110,9 @@ export default function DemoPage() {
                 </div>
                 <div>
                   <p className="font-medium text-sm">John Doe</p>
-                  <p className="text-xs text-muted-foreground">Full Stack Dev</p>
+                  <p className="text-xs text-muted-foreground">
+                    Full Stack Dev
+                  </p>
                 </div>
               </div>
               <Link href="/">
@@ -99,15 +131,23 @@ export default function DemoPage() {
         {/* Header */}
         <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b bg-background/95 px-6 backdrop-blur">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
               <Menu className="h-5 w-5" />
             </Button>
             <div className="relative hidden md:block w-96">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search for projects, skills, or students..." className="pl-9" />
+              <Input
+                placeholder="Search for projects, skills, or students..."
+                className="pl-9"
+              />
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="h-5 w-5" />
@@ -122,7 +162,9 @@ export default function DemoPage() {
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-              <p className="text-muted-foreground">Welcome back! Here's what's happening with your cohort.</p>
+              <p className="text-muted-foreground">
+                Welcome back! Here's what's happening with your cohort.
+              </p>
             </div>
             <Button className="gap-2">
               <Plus className="h-4 w-4" />
@@ -137,20 +179,34 @@ export default function DemoPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Active Projects</CardTitle>
-                  <CardDescription>Your current ongoing collaborations.</CardDescription>
+                  <CardDescription>
+                    Your current ongoing collaborations.
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {ACTIVE_PROJECTS.map((project) => (
-                    <div key={project.id} className="flex items-center justify-between p-4 rounded-lg border bg-card/50 hover:bg-accent/50 transition-colors">
+                    <div
+                      key={project.id}
+                      className="flex items-center justify-between p-4 rounded-lg border bg-card/50 hover:bg-accent/50 transition-colors"
+                    >
                       <div className="space-y-1">
-                        <p className="font-medium leading-none">{project.name}</p>
-                        <p className="text-sm text-muted-foreground">{project.dueDate}</p>
+                        <p className="font-medium leading-none">
+                          {project.name}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {project.dueDate}
+                        </p>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <span className="text-sm font-medium">{project.progress}%</span>
+                          <span className="text-sm font-medium">
+                            {project.progress}%
+                          </span>
                           <div className="h-2 w-24 rounded-full bg-secondary mt-1">
-                            <div className="h-full rounded-full bg-primary" style={{ width: `${project.progress}%` }}></div>
+                            <div
+                              className="h-full rounded-full bg-primary"
+                              style={{ width: `${project.progress}%` }}
+                            ></div>
                           </div>
                         </div>
                         <Button variant="ghost" size="icon">
@@ -166,21 +222,36 @@ export default function DemoPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Recommended Teammates</CardTitle>
-                  <CardDescription>Based on your skills and project interests.</CardDescription>
+                  <CardDescription>
+                    Based on your skills and project interests.
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">
                   {RECOMMENDED_TEAMMATES.map((person) => (
-                    <div key={person.id} className="flex items-center justify-between p-4 rounded-lg border">
+                    <div
+                      key={person.id}
+                      className="flex items-center justify-between p-4 rounded-lg border"
+                    >
                       <div className="flex items-center gap-4">
                         <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center font-bold text-secondary-foreground">
-                          {person.name.split(' ').map(n => n[0]).join('')}
+                          {person.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
                         </div>
                         <div>
-                          <p className="font-medium leading-none">{person.name}</p>
-                          <p className="text-sm text-muted-foreground">{person.role}</p>
+                          <p className="font-medium leading-none">
+                            {person.name}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {person.role}
+                          </p>
                           <div className="flex gap-2 mt-2">
-                            {person.skills.map(skill => (
-                              <span key={skill} className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20">
+                            {person.skills.map((skill) => (
+                              <span
+                                key={skill}
+                                className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
+                              >
                                 {skill}
                               </span>
                             ))}
@@ -191,7 +262,9 @@ export default function DemoPage() {
                         <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-900/20 dark:text-green-400 dark:ring-green-900/50">
                           {person.match} Match
                         </span>
-                        <Button size="sm" variant="secondary">Connect</Button>
+                        <Button size="sm" variant="secondary">
+                          Connect
+                        </Button>
                       </div>
                     </div>
                   ))}
@@ -205,26 +278,40 @@ export default function DemoPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Cohort Activity</CardTitle>
-                  <CardDescription>Live updates from your community.</CardDescription>
+                  <CardDescription>
+                    Live updates from your community.
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="relative pl-6 border-l-2 border-muted pb-2">
                     <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
                     <p className="text-sm font-medium">New Project Created</p>
-                    <p className="text-xs text-muted-foreground mt-1">"AI Study Group" was started by Sarah and 2 others.</p>
-                    <p className="text-xs text-muted-foreground mt-1">10 mins ago</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      "AI Study Group" was started by Sarah and 2 others.
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      10 mins ago
+                    </p>
                   </div>
                   <div className="relative pl-6 border-l-2 border-muted pb-2">
                     <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
                     <p className="text-sm font-medium">Hackathon Announced</p>
-                    <p className="text-xs text-muted-foreground mt-1">The Winter Cohort Hackathon starts this Friday!</p>
-                    <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      The Winter Cohort Hackathon starts this Friday!
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      2 hours ago
+                    </p>
                   </div>
                   <div className="relative pl-6 border-l-2 border-muted">
                     <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
                     <p className="text-sm font-medium">New Resource Shared</p>
-                    <p className="text-xs text-muted-foreground mt-1">Alex shared "Ultimate React Guide" in #resources.</p>
-                    <p className="text-xs text-muted-foreground mt-1">5 hours ago</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Alex shared "Ultimate React Guide" in #resources.
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      5 hours ago
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -232,17 +319,25 @@ export default function DemoPage() {
               {/* Quick Actions */}
               <Card className="bg-primary text-primary-foreground">
                 <CardHeader>
-                  <CardTitle className="text-primary-foreground">Need Help?</CardTitle>
+                  <CardTitle className="text-primary-foreground">
+                    Need Help?
+                  </CardTitle>
                   <CardDescription className="text-primary-foreground/80">
                     Find a mentor or ask the community.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-2">
-                  <Button variant="secondary" className="w-full justify-start gap-2">
+                  <Button
+                    variant="secondary"
+                    className="w-full justify-start gap-2"
+                  >
                     <MessageSquare className="h-4 w-4" />
                     Ask in #general
                   </Button>
-                  <Button variant="secondary" className="w-full justify-start gap-2">
+                  <Button
+                    variant="secondary"
+                    className="w-full justify-start gap-2"
+                  >
                     <Users className="h-4 w-4" />
                     Find a Mentor
                   </Button>
@@ -258,10 +353,10 @@ export default function DemoPage() {
 
 function NavItem({ icon, label, active, badge }) {
   return (
-    <Button 
-      variant={active ? "secondary" : "ghost"} 
+    <Button
+      variant={active ? "secondary" : "ghost"}
       className={cn(
-        "w-full justify-start gap-3 mb-1", 
+        "w-full justify-start gap-3 mb-1",
         active && "bg-secondary font-medium"
       )}
     >

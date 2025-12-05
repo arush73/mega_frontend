@@ -10,7 +10,7 @@ export const messageService = {
   // Send a message
   sendMessage: async (chatId, content, attachments = []) => {
     const formData = new FormData()
-    
+
     if (content) {
       formData.append("content", content)
     }
