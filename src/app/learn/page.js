@@ -8,6 +8,7 @@ import { useCohortStore } from "@/app/store/useCohortStore"
 import { useTeamStore } from "@/app/store/useTeamStore"
 import { Loader } from "@/components/ui/loader"
 import { useSocket } from "@/hooks/useSocket"
+import { Navigate } from "next/navigation"
 
 export default function Page() {
   const { user, checkUser, isCheckingUser } = useAuthStore()
@@ -49,9 +50,9 @@ export default function Page() {
   }
 
   // Redirect if no user
-  if (!user) {
-    return null
-  }
+  // if (!user) {
+  //   return <Navigate to="/login" />
+  // }
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
@@ -94,7 +95,7 @@ export default function Page() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-foreground mb-2">
-                  Welcome to Learning Hub! 👋
+                  Welcome to ClarityHub! 👋
                 </h2>
                 <p className="text-muted-foreground">
                   Select a {activeTab === "cohorts" ? "cohort" : "team"} from

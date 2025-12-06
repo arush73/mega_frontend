@@ -8,6 +8,8 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/app/store/useAuthStore"
 
 import {
   Avatar,
@@ -34,6 +36,13 @@ export function NavUser({
   user,
 }) {
   const { isMobile } = useSidebar()
+  const router = useRouter()
+  const { logOut } = useAuthStore()
+
+  const handleLogout = async () => {
+    await logOut()
+    router.push("/login")
+  }
 
   return (
     <SidebarMenu>
@@ -82,7 +91,7 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/profile")}>
                 <BadgeCheck />
                 Account
               </DropdownMenuItem>
@@ -96,7 +105,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>
