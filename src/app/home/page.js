@@ -12,7 +12,7 @@ import {
   CheckCircle2,
   GalleryVerticalEnd,
 } from "lucide-react"
-import { useAuthStore } from "@/app//store/useAuthStore"
+import { useAuthStore } from "@/app/store/useAuthStore"
 
 export default function Home() {
   const { user } = useAuthStore()
