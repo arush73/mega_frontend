@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import { Users, GraduationCap, Command } from "lucide-react"
-import { NavUser } from "@/components/nav-user"
+import { DemoNavUser } from "./DemoNavUser"
 import {
   Sidebar,
   SidebarContent,
@@ -15,17 +15,17 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useAuthStore } from "@/app/store/useAuthStore"
-import { useCohortStore } from "@/app/store/useCohortStore"
-import { useTeamStore } from "@/app/store/useTeamStore"
 import { ModeToggle } from "@/components/mode-toggle"
 
-
-export function LearnAppSidebar({ onItemSelect, selectedItem, activeTab, onTabChange, ...props }) {
-  const { user } = useAuthStore()
-  const { cohorts } = useCohortStore()
-  const { teams } = useTeamStore()
+export function DemoLearnAppSidebar({ onItemSelect, selectedItem, activeTab, onTabChange, cohorts, teams, ...props }) {
   const { setOpen } = useSidebar()
+
+  // Mock user for demo
+  const user = {
+    name: "Demo User",
+    email: "demo@clarityhub.com",
+    avatar: "https://github.com/shadcn.png",
+  }
 
   const navItems = [
     {
@@ -105,14 +105,8 @@ export function LearnAppSidebar({ onItemSelect, selectedItem, activeTab, onTabCh
         </SidebarContent>
 
         <SidebarFooter>
-          <ModeToggle />
-          <NavUser
-            user={{
-              name: user?.username || user?.email || "User",
-              email: user?.email || "",
-              avatar: user?.avatar || "https://via.placeholder.com/200x200.png",
-            }}
-          />
+          <ModeToggle/>
+          <DemoNavUser user={user} />
         </SidebarFooter>
       </Sidebar>
 

@@ -1,372 +1,120 @@
 "use client"
-
 import { useState } from "react"
-import Link from "next/link"
-import {
-  LayoutDashboard,
-  Users,
-  MessageSquare,
-  FolderGit2,
-  Settings,
-  Bell,
-  Search,
-  Menu,
-  LogOut,
-  Plus,
-  MoreVertical,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+import { DemoLearnAppSidebar } from "./DemoLearnAppSidebar"
+import { DemoChatPanel } from "./DemoChatPanel"
+import { SidebarProvider } from "@/components/ui/sidebar"
 
-// Mock Data
-const RECOMMENDED_TEAMMATES = [
-  {
-    id: 1,
-    name: "Sarah Chen",
-    role: "Frontend Dev",
-    skills: ["React", "Tailwind", "Figma", "tight pussy"],
-    match: "98%",
+const MOCK_COHORTS = [
+  { 
+    _id: "c1", 
+    name: "Cohort 1", 
+    description: "Introduction to Computer Science",
+    startDate: "2024-01-01",
+    members: new Array(150),
+    avatar: "" 
   },
-  {
-    id: 2,
-    name: "Alex Kumar",
-    role: "Backend Dev",
-    skills: ["Node.js", "PostgreSQL", "Redis"],
-    match: "95%",
+  { 
+    _id: "c2", 
+    name: "Cohort 2", 
+    description: "Advanced Algorithms",
+    startDate: "2024-03-15",
+    members: new Array(85),
+    avatar: "" 
   },
-  {
-    id: 3,
-    name: "Jordan Smith",
-    role: "UI/UX Designer",
-    skills: ["Figma", "Prototyping", "User Research"],
-    match: "92%",
+  { 
+    _id: "c3", 
+    name: "Full Stack Web Dev", 
+    description: "MERN Stack Bootcamp",
+    startDate: "2024-06-01",
+    members: new Array(200),
+    avatar: "" 
   },
 ]
 
-const ACTIVE_PROJECTS = [
-  {
-    id: 1,
-    name: "E-Learning Platform",
-    status: "In Progress",
-    progress: 65,
-    dueDate: "2 days left",
+const MOCK_TEAMS = [
+  { 
+    _id: "t1", 
+    name: "Team Alpha", 
+    description: "Working on the capstone project",
+    members: new Array(4),
+    avatar: "" 
   },
-  {
-    id: 2,
-    name: "Finance Dashboard",
-    status: "Review",
-    progress: 90,
-    dueDate: "5 days left",
+  { 
+    _id: "t2", 
+    name: "Hackathon Team", 
+    description: "Winter Hackathon 2024",
+    members: new Array(3),
+    avatar: "" 
   },
 ]
 
 export default function DemoPage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [activeTab, setActiveTab] = useState("teams") // Default to teams
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab)
+    setSelectedItem(null) // Reset selection when changing tabs
+  }
+
+  const handleItemSelect = (item) => {
+    setSelectedItem(item)
+  }
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
-      {/* Sidebar */}
-      <aside
-        className={cn(
-          "fixed inset-y-0 left-0 z-30 w-64 transform border-r bg-card transition-transform duration-200 ease-in-out md:relative md:translate-x-0",
-          !isSidebarOpen && "-translate-x-full md:hidden"
-        )}
+    <div className="flex h-screen overflow-hidden bg-background">
+      <SidebarProvider
+        style={{
+          "--sidebar-width": "350px",
+        }}
       >
-        <div className="flex h-16 items-center border-b px-6">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
-              <FolderGit2 className="size-5" />
-            </div>
-            <span>TeamBuilder</span>
-          </div>
-        </div>
+        <DemoLearnAppSidebar
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          selectedItem={selectedItem}
+          onItemSelect={handleItemSelect}
+          cohorts={MOCK_COHORTS}
+          teams={MOCK_TEAMS}
+        />
 
-        <nav className="space-y-1 p-4">
-          <NavItem icon={<LayoutDashboard />} label="Dashboard" active />
-          <NavItem icon={<Users />} label="Find Teammates" />
-          <NavItem icon={<MessageSquare />} label="Messages" badge="3" />
-          <NavItem icon={<FolderGit2 />} label="My Projects" />
-          <NavItem icon={<Settings />} label="Settings" />
-        </nav>
-
-        <div className="absolute bottom-4 left-4 right-4">
-          <Card className="bg-primary/5 border-primary/10">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                  JD
+        {/* Right Panel - Chat */}
+        {selectedItem ? (
+          <DemoChatPanel
+            type={activeTab === "cohorts" ? "cohort" : "team"}
+            item={selectedItem}
+            variant="clean"
+          />
+        ) : (
+          <div className="flex-1 flex items-center justify-center bg-background">
+            <div className="text-center max-w-md px-4">
+              <div className="mb-6">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  <svg
+                    className="w-12 h-12 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
                 </div>
-                <div>
-                  <p className="font-medium text-sm">John Doe</p>
-                  <p className="text-xs text-muted-foreground">
-                    Full Stack Dev
-                  </p>
-                </div>
+                <h2 className="text-2xl font-bold text-foreground mb-2">
+                  Welcome to ClarityHub Demo! 👋
+                </h2>
+                <p className="text-muted-foreground">
+                  Select a {activeTab === "cohorts" ? "cohort" : "team"} from
+                  the sidebar to start chatting
+                </p>
               </div>
-              <Link href="/">
-                <Button variant="outline" size="sm" className="w-full gap-2">
-                  <LogOut className="h-4 w-4" />
-                  Exit Demo
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Header */}
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b bg-background/95 px-6 backdrop-blur">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
-            <div className="relative hidden md:block w-96">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search for projects, skills, or students..."
-                className="pl-9"
-              />
             </div>
           </div>
-
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="h-5 w-5" />
-              <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-destructive"></span>
-            </Button>
-            <ModeToggle />
-          </div>
-        </header>
-
-        {/* Dashboard Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
-          <div className="mb-8 flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-              <p className="text-muted-foreground">
-                Welcome back! Here's what's happening with your cohort.
-              </p>
-            </div>
-            <Button className="gap-2">
-              <Plus className="h-4 w-4" />
-              Create Project
-            </Button>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-            {/* Main Column */}
-            <div className="col-span-4 space-y-6">
-              {/* Active Projects */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Active Projects</CardTitle>
-                  <CardDescription>
-                    Your current ongoing collaborations.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {ACTIVE_PROJECTS.map((project) => (
-                    <div
-                      key={project.id}
-                      className="flex items-center justify-between p-4 rounded-lg border bg-card/50 hover:bg-accent/50 transition-colors"
-                    >
-                      <div className="space-y-1">
-                        <p className="font-medium leading-none">
-                          {project.name}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {project.dueDate}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-right">
-                          <span className="text-sm font-medium">
-                            {project.progress}%
-                          </span>
-                          <div className="h-2 w-24 rounded-full bg-secondary mt-1">
-                            <div
-                              className="h-full rounded-full bg-primary"
-                              style={{ width: `${project.progress}%` }}
-                            ></div>
-                          </div>
-                        </div>
-                        <Button variant="ghost" size="icon">
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              {/* Recommended Teammates */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Recommended Teammates</CardTitle>
-                  <CardDescription>
-                    Based on your skills and project interests.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-4">
-                  {RECOMMENDED_TEAMMATES.map((person) => (
-                    <div
-                      key={person.id}
-                      className="flex items-center justify-between p-4 rounded-lg border"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center font-bold text-secondary-foreground">
-                          {person.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
-                        </div>
-                        <div>
-                          <p className="font-medium leading-none">
-                            {person.name}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {person.role}
-                          </p>
-                          <div className="flex gap-2 mt-2">
-                            {person.skills.map((skill) => (
-                              <span
-                                key={skill}
-                                className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20"
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-end gap-2">
-                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-900/20 dark:text-green-400 dark:ring-green-900/50">
-                          {person.match} Match
-                        </span>
-                        <Button size="sm" variant="secondary">
-                          Connect
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Sidebar Column */}
-            <div className="col-span-3 space-y-6">
-              {/* Cohort Activity */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Cohort Activity</CardTitle>
-                  <CardDescription>
-                    Live updates from your community.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="relative pl-6 border-l-2 border-muted pb-2">
-                    <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
-                    <p className="text-sm font-medium">New Project Created</p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      "AI Study Group" was started by Sarah and 2 others.
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      10 mins ago
-                    </p>
-                  </div>
-                  <div className="relative pl-6 border-l-2 border-muted pb-2">
-                    <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
-                    <p className="text-sm font-medium">Hackathon Announced</p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      The Winter Cohort Hackathon starts this Friday!
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      2 hours ago
-                    </p>
-                  </div>
-                  <div className="relative pl-6 border-l-2 border-muted">
-                    <div className="absolute -left-[5px] top-0 h-2.5 w-2.5 rounded-full bg-primary"></div>
-                    <p className="text-sm font-medium">New Resource Shared</p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Alex shared "Ultimate React Guide" in #resources.
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      5 hours ago
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Actions */}
-              <Card className="bg-primary text-primary-foreground">
-                <CardHeader>
-                  <CardTitle className="text-primary-foreground">
-                    Need Help?
-                  </CardTitle>
-                  <CardDescription className="text-primary-foreground/80">
-                    Find a mentor or ask the community.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-2">
-                  <Button
-                    variant="secondary"
-                    className="w-full justify-start gap-2"
-                  >
-                    <MessageSquare className="h-4 w-4" />
-                    Ask in #general
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    className="w-full justify-start gap-2"
-                  >
-                    <Users className="h-4 w-4" />
-                    Find a Mentor
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </main>
-      </div>
+        )}
+      </SidebarProvider>
     </div>
-  )
-}
-
-function NavItem({ icon, label, active, badge }) {
-  return (
-    <Button
-      variant={active ? "secondary" : "ghost"}
-      className={cn(
-        "w-full justify-start gap-3 mb-1",
-        active && "bg-secondary font-medium"
-      )}
-    >
-      {icon}
-      <span className="flex-1 text-left">{label}</span>
-      {badge && (
-        <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-          {badge}
-        </span>
-      )}
-    </Button>
   )
 }
